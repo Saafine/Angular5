@@ -1,10 +1,11 @@
 const webpack = require('webpack');
+const helpers = require('./helpers');
+const path = require('path');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const helpers = require('./helpers');
 
 module.exports = {
-
   // the entry-point files that define the bundles
   entry: {
     'polyfills': './src/polyfills.ts',
@@ -38,40 +39,64 @@ module.exports = {
         loader: 'file-loader?name=assets/[name].[hash].[ext]'
       },
 
-      // the first css pattern matches application-wide styles
-      // {
-      //   test: /\.css$/,
-      //   exclude: helpers.root('src', 'app'), // the component-scoped styles sit here, so they must be excluded
-      //   loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' })
-      // },
-      //
-      // // the second css patern handles component-scoped styles (the ones specified in a component's styleUrls metadata property).
-      // {
-      //   test: /\.css$/,
-      //   include: helpers.root('src', 'app'),
-      //   loader: 'raw-loader'
-      // }
+      /**
+       * To string and scs/css loader support for *.css / *.scss files (from Angular components)
+       * Returns file content as string
+       *
+       */
+      {
+        test: /\.css$/,
+        use: ['to-string-loader', 'css-loader'],
+        exclude: [helpers.root('src', 'styles')]
+      },
+      {
+        test: /\.scss$/,
+        use: ['to-string-loader', 'css-loader', 'sass-loader'],
+        exclude: [helpers.root('src', 'styles')]
+      },
+
+      /**
+       * Css and SCSS loader support for *.css / *.scss files (styles directory only)
+       * Loads external css styles into the DOM, supports HMR
+       *
+       */
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+        include: [helpers.root('src', 'styles')]
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        }),
+        // use: ['style-loader', 'css-loader', 'sass-loader'],
+        include: [helpers.root('src', 'styles')]
+      },
     ]
   },
 
   // creates instances of the plugins
   plugins: [
-    // !todo remove ?
-    // Workaround for angular/angular#11580
-    // new webpack.ContextReplacementPlugin(
-    //   // The (\\|\/) piece accounts for path separators in *nix and Windows
-    //   /angular(\\|\/)core(\\|\/)@angular/,
-    //   helpers.root('./src'), // location of your src
-    //   {} // a map of your routes
-    // ),
+    // This fixes 'Critical dependency: the request of a dependency is an expression' error on compilation
+    new webpack.ContextReplacementPlugin(
+      /angular(\\|\/)core/,
+      path.resolve(__dirname, '../src')
+    ),
 
     // Create multiple chunks
-    new webpack.optimize.CommonsChunkPlugin({
-      name: ['app', 'vendor', 'polyfills']
-    }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: ['app', 'vendor', 'polyfills'],
+    // }),
 
     new HtmlWebpackPlugin({
       template: 'src/index.html'
-    })
+    }),
+
+    // Extracts global css rules and puts it into a css file, so that it can be cached
+    new ExtractTextPlugin('global-[hash].css'),
+
+
   ]
 };
