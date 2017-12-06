@@ -1,0 +1,10 @@
+.select {
+  border: 1px solid $primary-1;
+  background: transparent;
+  padding: 10px;
+  border-radius: 3px;
+
+  &:focus {
+    outline: 0;
+  }
+}

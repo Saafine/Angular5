@@ -4,6 +4,10 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin'); // copy static assets
+const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 module.exports = {
   // the entry-point files that define the bundles
@@ -27,7 +31,9 @@ module.exports = {
           {
             loader: 'awesome-typescript-loader',
             options: { configFileName: helpers.root('src', 'tsconfig.json') }
-          } , 'angular2-template-loader' // angular2-template-loader -> loads angular components' template and styles (styleUrls / templateUrls)
+          },
+          'angular2-template-loader', // angular2-template-loader -> loads angular components' template and styles (styleUrls / templateUrls)
+          'angular-router-loader' // handle lazy loaded routes
         ]
       },
       {
@@ -37,43 +43,7 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
         loader: 'file-loader?name=assets/[name].[hash].[ext]'
-      },
-
-      /**
-       * To string and scs/css loader support for *.css / *.scss files (from Angular components)
-       * Returns file content as string
-       *
-       */
-      {
-        test: /\.css$/,
-        use: ['to-string-loader', 'css-loader'],
-        exclude: [helpers.root('src', 'styles')]
-      },
-      {
-        test: /\.scss$/,
-        use: ['to-string-loader', 'css-loader', 'sass-loader'],
-        exclude: [helpers.root('src', 'styles')]
-      },
-
-      /**
-       * Css and SCSS loader support for *.css / *.scss files (styles directory only)
-       * Loads external css styles into the DOM, supports HMR
-       *
-       */
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-        include: [helpers.root('src', 'styles')]
-      },
-      {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        }),
-        // use: ['style-loader', 'css-loader', 'sass-loader'],
-        include: [helpers.root('src', 'styles')]
-      },
+      }
     ]
   },
 
@@ -91,12 +61,27 @@ module.exports = {
     // }),
 
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: 'src/index.html',
+      chunksSortMode: helpers.packageSort(['polyfills', 'vendor', 'app'])
     }),
 
     // Extracts global css rules and puts it into a css file, so that it can be cached
-    new ExtractTextPlugin('global-[hash].css'),
+    new ExtractTextPlugin('[name].[contenthash].css'),
 
+
+    // Copy statics assets
+    new CopyWebpackPlugin([
+      { from: 'src/assets', to: 'assets' }]
+    ),
+
+    // new BundleAnalyzerPlugin(),
+
+    new CommonsChunkPlugin({
+      name: "abc",
+      chunks: ["app" ,'vendor'],
+      filename: 'commons.[chunkhash].js',
+      minChunks: 2
+    })
 
   ]
 };

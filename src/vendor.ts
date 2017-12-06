@@ -1,3 +1,9 @@
+// Polyfills
+// import 'core-js/es6';
+// import 'reflect-metadata';
+// require('zone.js/dist/zone');
+
+
 // Angular
 import '@angular/platform-browser';
 import '@angular/platform-browser-dynamic';

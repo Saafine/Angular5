@@ -8,13 +8,13 @@ const helpers = require('./helpers');
 // --------------------
 const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const HOST = process.env.HOST || 'localhost';
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8000;
 const PUBLIC = process.env.PUBLIC_DEV || HOST + ':' + PORT;
 const METADATA = {
   host: HOST,
   port: PORT,
   public: PUBLIC,
-  ENV: ENV,
+  ENV: ENV
 };
 // ----------------------------------------------------
 
@@ -60,6 +60,60 @@ module.exports = webpackMerge(commonConfig, {
      */
     chunkFilename: '[id].chunk.js'
   },
+  module: {
+    rules: [
+      /**
+       * To string and scs/css loader support for *.css / *.scss files (from Angular components)
+       * Returns file content as string
+       *
+       */
+      {
+        test: /\.css$/,
+        use: ['to-string-loader', 'css-loader'],
+        exclude: [helpers.root('src', 'styles')]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'to-string-loader',
+          { loader: 'css-loader', options: { importLoaders: 1, minimize: false } },
+          {
+            loader: 'postcss-loader',
+            options: { config: { path: './config/postcss.config.js' } }
+          },
+          'sass-loader'],
+        exclude: [helpers.root('src', 'styles')]
+      },
+
+      /**
+       * Css and SCSS loader support for *.css / *.scss files (styles directory only)
+       * Loads external css styles into the DOM, supports HMR
+       *
+       */
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+        include: [helpers.root('src', 'styles')]
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader', options: { importLoaders: 1, minimize: false } },
+            {
+              loader: 'postcss-loader', options: {
+              config: { path: './config/postcss.config.js' }
+            }
+            },
+            'sass-loader'
+          ]
+        }),
+        // use: ['style-loader', 'css-loader', 'sass-loader'], // without extract text plugin
+        include: [helpers.root('src', 'styles')]
+      }
+    ]
+  },
 
   plugins: [
     /**
@@ -76,9 +130,8 @@ module.exports = webpackMerge(commonConfig, {
     new DefinePlugin({
       'ENV': JSON.stringify(METADATA.ENV),
       'process.env.ENV': JSON.stringify(METADATA.ENV),
-      'process.env.NODE_ENV': JSON.stringify(METADATA.ENV),
-    }),
-    // new ExtractTextPlugin('[name].css')
+      'process.env.NODE_ENV': JSON.stringify(METADATA.ENV)
+    })
   ],
 
   //  The dev server keeps all bundles in memory; it doesn't write them to disk
