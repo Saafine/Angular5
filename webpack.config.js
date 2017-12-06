@@ -1,6 +1,7 @@
 console.log('Node environment:', process.env.NODE_ENV);
 
-const ENVIRONMENT = process.env.NODE_ENV.trim();
+// const ENVIRONMENT = process.env.NODE_ENV.trim();
+const ENVIRONMENT = 'production'; // !todo
 switch (ENVIRONMENT) {
   case 'dev':
   case 'development':
