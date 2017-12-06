@@ -15,7 +15,6 @@ phases:
   post_build:
     commands:
       - echo Entered the post_build phase...
-      - aws s3 sync dist/ s3://dev.webclient.xbt.com
 artifacts:
   files:
     - 'dist/**/*'
