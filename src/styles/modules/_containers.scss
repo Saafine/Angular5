@@ -1,0 +1,162 @@
+@import '../variables';
+
+// Containers
+// --------------------
+.container {
+  display: block;
+  margin: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: $container-background;
+  overflow: auto;
+}
+
+.container-padding-1 {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.container-title {
+  color: $primary-1;
+  font-size: $font-xl;
+  font-weight: $font-weight-700;
+  margin-bottom: 20px;
+}
+
+.container-tab {
+  @extend .container-title;
+  color: $primary-gray-3;
+  transition: 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    color: $primary-1;
+  }
+
+  .active {
+    color: $primary-1;
+  }
+}
+
+.section-title {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid $primary-gray-5;
+  font-weight: $font-weight-500;
+  margin-bottom: 10px;
+}
+
+// ----------------------------------------------------
+
+// Tables
+// --------------------
+.table-wrapper {
+  //display: block; // needed to enable scroll
+  overflow-x: auto;
+  border-collapse: collapse;
+  //width: 100%;
+
+  &.table-hoverable {
+    tr {
+      &:hover {
+        background: $primary-gray-5;
+      }
+    }
+  }
+
+  td {
+    //height: 25px;
+    text-align: center;
+    //border: 1px solid red;
+    padding: 5px 15px 5px 15px;
+  }
+
+  //&:first-child {
+  //  padding-top: 0!important;
+  //}
+}
+
+.table-font-header {
+  font-weight: $font-weight-500;
+  color: $primary-gray-1;
+}
+
+.table-sum {
+  font-weight: $font-weight-500;
+  color: $primary-1;
+}
+
+.table-section {
+  border-bottom: 1px solid $primary-gray-5;
+  border-top: 1px solid $primary-gray-5;
+}
+
+// ----------------------------------------------------
+
+// ----------------------------------------
+
+// Z-depths
+// --------------------
+.z-depth-1 {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16);
+}
+
+.z-depth-2 {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .24);
+}
+
+// ----------------------------------------
+
+// Borders
+// --------------------
+.border {
+  border: 1px solid $primary-gray-5;
+}
+
+// Top
+// --------------------
+.border-t {
+  border-top: 1px solid $primary-gray-5;
+}
+
+// Bottom
+// --------------------
+.border-b {
+  border-bottom: 1px solid $primary-gray-5;
+}
+
+// Left
+// --------------------
+.border-l {
+  border-left: 1px solid $primary-gray-5;
+}
+
+// Right
+// --------------------
+.border-r {
+  border-right: 1px solid $primary-gray-5;
+}
+
+// Left and Right
+// --------------------
+.border-x {
+  border-left: 1px solid $primary-gray-5;
+  border-right: 1px solid $primary-gray-5;
+}
+
+// Top and Bottom
+// --------------------
+.border-y {
+  border-top: 1px solid $primary-gray-5;
+  border-bottom: 1px solid $primary-gray-5;
+}
+
+// ----------------------------------------------------
+
+// Backgrounds
+// --------------------
+.container-warning {
+  background: $primary-red-1;
+  color: $primary-gray-5;
+}
+// ----------------------------------------------------

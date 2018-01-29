@@ -1,0 +1,116 @@
+// Colors
+// ------------------
+
+// Primary colors
+$primary-1: #0083c2; // navbar
+$primary-2: #2580ea; // buttons
+$primary-white: #fff;
+$primary-black: black;
+
+$primary-gray-1: #2c2d2f; // gray (very strong)
+$primary-gray-2: #60696e; // gray (strong)
+$primary-gray-3: #7a8994; // gray (weak)
+$primary-gray-4: #cdcfd1; // gray
+$primary-gray-5: #eaecee; // gray (barely visible)
+
+$primary-red-1: #ED3E39; // warnings
+$primary-orange-1: orange;
+$primary-green-1: #07c25f;
+
+// Backgrounds
+// ------------------
+$body-background: #F5F9FA;
+$container-background: #FFFFFF;
+$body-color: $primary-gray-2;
+// ------------------------------------
+
+// Other colors
+$material-1: #ef3e3c;
+$material-2: #e51263;
+$material-3: #9a22ae;
+$material-4: #6738b4;
+$material-5: #424fb2;
+$material-6: #3595f0;
+$material-7: #2cbcd3;
+$material-8: #1e9586;
+$material-9: #50b052;
+$material-10: #8cc350;
+$material-11: #cbdc45;
+$material-12: #fde94a;
+$material-13: #fbc12a;
+$material-14: #fb9623;
+$material-15: #fa522d;
+$material-16: #77544a;
+$material-17: #9d9d9d;
+$material-18: #617c89;
+
+// Font on element
+//$color-on-body: #2c2d2f;
+//color-on-warning: #FF5555;
+// ------------------------------------
+
+// Font sizes
+$font-xs: 11px;
+$font-s: 12px;
+$font-m: 13px;
+$font-l: 14px;
+$font-xl: 15px;
+$font-xxl: 19px;
+// ------------------------------------
+
+// Font weights for the maint font (make sure listed font weights are downloaded)
+// ------------------
+$font-weight-300: 300;
+$font-weight-400: 400;
+$font-weight-500: 500;
+$font-weight-700: 700;
+$font-weight-900: 900;
+// ------------------------------------
+
+// Responsiveness
+// ------------------
+$screen-mobile-max-width: 700px;
+$screen-mobile-max-height: 650px;
+// ------------------------------------
+
+// Spaceing
+// ------------------
+$spacer: 20px;
+// ------------------------------------
+
+// Containers
+// ------------------
+//$container-margin: 9px;
+//$container-padding: 35px;
+// ------------------------------------
+
+// Border radiuses
+// ------------------
+$radius-1: 5px; // tooltip, inputs
+// ------------------------------------
+
+// Z-indexes
+// ------------------
+$z-index-100: 100; // used for container show/hide toggle buttons
+$z-index-120: 120; // user for modal background
+$z-index-200: 200; // used for dropdown with options visibile
+$z-index-850: 850; // used by navigation buttons (next step, back step)
+$z-index-900: 900; // used by modal overlay
+$z-index-910: 910; // used by modal content, !warn - nothing should be higher than this besides the loader
+$z-index-920: 920; // app loader
+// ------------------------------------
+
+// Z-depths
+// ------------------
+@mixin z-depth-1() {
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1) // wl-container
+}
+
+@mixin z-depth-primary-1() {
+  box-shadow: 3px 3px 10px rgba($primary-1, 0.1) // wl-container
+}
+// ------------------------------------
+
+
+
+

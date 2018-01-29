@@ -1,0 +1,63 @@
+// Position
+// --------------------
+.text-center {
+  text-align: center!important;
+}
+
+.text-left {
+  text-align: left!important;
+}
+
+.text-right {
+  text-align: right!important;
+}
+
+// Flexbox styles
+// --------------------
+.flex {
+  display: flex;
+}
+
+.flex-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  //display: flex!important;
+  //position: relative;
+}
+
+// Important! Flex: 1 will break layout on IE11, KEEP IT AS IT IS
+.flex-1 {
+  //flex: 1 0 auto; ie ?
+  flex: 1 0 0;
+}
+
+.flex-2 {
+  //flex: 1 0 auto; ie ?
+  flex: 2 0 0;
+}
+
+// Flexbox direction
+.flex-column {
+  flex-direction: column;
+}
+
+// Flexbox positioning
+.flex-align-items-center {
+  align-items: center;
+}
+
+.flex-align-items-end {
+  align-items: flex-end;
+}
+
+.flex-justify-center {
+  justify-content: center;
+}
+
+.flex-justify-space-between {
+  justify-content: space-between;
+}
+
+.flex-justify-end {
+  justify-content: flex-end;
+}

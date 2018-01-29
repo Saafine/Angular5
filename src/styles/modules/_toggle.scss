@@ -1,0 +1,89 @@
+@import '../variables';
+
+// Toggle button
+// --------------------
+/* Example:
+  <div class="toggle-button-wrapper">
+  <div class="mr-2">Off</div>
+  <div class="toggle-body-wrapper">
+  <input class="toggle-input" id="newTransaction" type="checkbox" [checked]="true">
+  <label class="toggle-body" for="newTransaction">
+  <i class="toggle-ball"></i>
+  </label>
+  </div>
+  <div class="ml-2">On</div>
+  </div>
+*/
+// ---------------------------------------------
+$toggle-height: 17px; // toggle height
+$toggle-width: 30px; // toggle width
+$toggle-ball: ($toggle-height)-4px; // ball radius
+$toggle-ball-center: 0px;
+$toggle-left: 3px;
+$toggle-right: $toggle-width - $toggle-ball - $toggle-left;
+$toggle-clicked: $toggle-width/3;
+
+.toggle-button-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-body-wrapper {
+  position: relative;
+  height: $toggle-height;
+
+  .toggle-body { //* Checkbox body */
+    position: relative;
+    display: block;
+    width: $toggle-width;
+    height: $toggle-height;
+    border-radius: 100px;
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    background-color: $primary-gray-5;
+  }
+
+  .toggle-body:active > .toggle-ball {
+    width: $toggle-height;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.20);
+  }
+
+  .toggle-body:hover > .toggle-ball {
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.20);
+    transform: scale(1.01);
+  }
+
+  .toggle-input:checked + .toggle-body > .toggle-ball {
+    margin-left: $toggle-right; // ON -> ball distance
+  }
+
+  .toggle-input:checked + .toggle-body:active > .toggle-ball {
+    margin-left: $toggle-clicked;
+  }
+
+  .toggle-input:checked + .toggle-body {
+    background-color: $primary-1;
+    @include z-depth-primary-1;
+  }
+
+  .toggle-input {
+    display: none;
+  }
+
+  /* The toggle */
+  .toggle-ball { // the ball
+    position: absolute;
+    height: $toggle-ball;
+    width: $toggle-ball;
+    background: #ffffff;
+    border-radius: 100px;
+    top: 2px;
+    left: 2px;
+    transition: all 0.2s ease-in-out;
+    pointer-events: none;
+  }
+
+  .wl-switch-button-toggle:active {
+    background-color: #97b2d9;
+  }
+}

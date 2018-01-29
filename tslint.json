@@ -1,0 +1,13 @@
+{
+  "rulesDirectory": [
+    "node_modules/codelyzer"
+  ],
+  "extends": ["tslint-config-airbnb"],
+  "rules": {
+    "max-line-length": [true, 200],
+    "align": [true, "parameters", "statements"],
+    "trailing-comma": [false],
+    "no-console": [true, "log", "error"],
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"]
+  }
+}

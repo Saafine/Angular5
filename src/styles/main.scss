@@ -1,0 +1,56 @@
+/* this file will be extracted to main dist folder and is imported in index.html */
+/* This file is for setting global styles  */
+@import 'vendor/normalize';
+@import 'vendor/font-awesome/font-awesome'; // !remember to set font's awesome variable ($fa-font-path: '../fonts') with correct path!
+
+@import '_variables';
+
+@import 'modules/_grid.scss';
+@import 'modules/_containers.scss';
+@import 'modules/_spacing';
+@import 'modules/_testing';
+@import 'modules/_icons';
+@import 'modules/_buttons';
+@import 'modules/_select';
+@import 'modules/_input';
+@import 'modules/_toggle';
+@import 'modules/checkbox';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: $body-color;
+  font-size: $font-m; // should always be medium
+  background: $body-background;
+}
+
+a {
+  outline: 0;
+  border: 0;
+}
+
+:focus {
+  outline: 0;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.max-width {
+  width: 100%;
+}
+
+.max-height {
+  height: 100%;
+}
+
+.relative {
+  position: relative;
+}

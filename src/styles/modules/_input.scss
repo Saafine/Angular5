@@ -1,0 +1,22 @@
+@import '../_variables';
+
+$input-transition: 0.5s;
+
+input {
+  color: $primary-gray-2;
+  background: transparent;
+  &:focus {
+    outline: 0;
+  }
+}
+
+.input {
+  border: 0;
+  border-bottom: 2px solid $primary-gray-5;
+  transition: $input-transition;
+  padding-bottom: 5px;
+
+  &:focus {
+    border-bottom: 2px solid $primary-1;
+  }
+}
