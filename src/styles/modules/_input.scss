@@ -14,9 +14,17 @@ input {
   border: 0;
   border-bottom: 2px solid $primary-gray-5;
   transition: $input-transition;
-  padding-bottom: 5px;
+  padding: 5px;
 
   &:focus {
     border-bottom: 2px solid $primary-1;
   }
+}
+
+// Calendar
+// --------------------
+.calendar-input {
+  border: 1px solid $primary-gray-4;
+  padding: 5px;
+  text-align: center;
 }

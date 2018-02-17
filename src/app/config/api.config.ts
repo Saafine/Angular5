@@ -12,10 +12,4 @@ if (TARGET_MACHINE === 'localhost') {
 /**
  * ASSIGN ENVIRONMENTAL VARIABLES
  */
-export const API_ADDRESS_TEST = ENV_CONFIG._API_ADDRESS_TEST;
-
-/**
- * TEST
- */
-export const POST_TEST = '/XXXX';
-
+export const API_ADDRESS = ENV_CONFIG._API_ADDRESS;

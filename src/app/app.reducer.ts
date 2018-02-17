@@ -1,11 +1,11 @@
-import { TestModel, testReducer } from './reducers/test.reducer';
+import { AppModel, appReducer } from './reducers/app.reducer';
 
-export const STORE_TEST = 'test';
+export const STORE_APP = 'app';
 
 export interface AppState {
-  test: TestModel;
+  app: AppModel;
 }
 
 export const reducers = {
-  test: testReducer
+  app: appReducer
 };

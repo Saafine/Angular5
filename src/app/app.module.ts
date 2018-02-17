@@ -1,14 +1,19 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
-import '../styles/main.scss';
 import { ROUTES } from './app.routes';
+
+/**
+ * All styles must be loaded from /styles directory, except inline component styles
+ */
+import '../styles/main.scss';
 
 // Components
 // --------------------
+import { AppComponent } from './app.component';
 // ----------------------------------------------------
 
 // Modules
@@ -23,26 +28,21 @@ import { MetaReducer, StoreModule } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { reducers } from './app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
+export const metaReducers: MetaReducer<any>[] = (ENV === 'production') ? [] : [storeFreeze];
 // ----------------------------------------------------
 
 // Providers
 // --------------------
-import { TestService } from './services/test.service';
-import { AppComponent } from './app.component';
 
-
-// Other
-// --------------------
-export const metaReducers: MetaReducer<any>[] = (ENV === 'production') ? [] : [storeFreeze];
 // ----------------------------------------------------
 
 const APP_PROVIDERS = [
-  TestService
 ];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +53,7 @@ const APP_PROVIDERS = [
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules,
     }),
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([]),
 
     /**

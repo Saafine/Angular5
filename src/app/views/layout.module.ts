@@ -5,21 +5,19 @@ import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module';
 
-import { LayoutComponent } from './layout.component';
-
-
 import { layoutRoutes } from './layout.routes';
+import { LayoutComponent } from './layout.component';
 
 @NgModule({
   declarations: [
-    LayoutComponent
+    LayoutComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     SharedModule,
     RouterModule.forChild(layoutRoutes),
-  ],
+  ]
 })
 export class LayoutModule {
 }
